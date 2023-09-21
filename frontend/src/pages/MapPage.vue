@@ -1,11 +1,15 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-page-container>
+    <q-page-container class="row justify-center">
       <q-page class="q-mx-lg" id="page">
         <div id="page-title" class="text-h4 q-my-lg text-center">PlaceCraft: Reimagining streets</div>
-        <div class="row justify-around">
+        <div class="q-mb-md">
           <div id="map"></div>
         </div>
+        <div class="row justify-center q-mb-md">
+          <q-btn color="primary" @click="navigateToNewPlacePage()">Add a place</q-btn>
+        </div>
+
       </q-page>
     </q-page-container>
   </q-layout>
@@ -65,9 +69,12 @@
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { Feature, GeoJsonProperties, Geometry } from 'GeoJSON'
 import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
+
+const router = useRouter()
 
 // Mapbox
 const accessToken = import.meta.env.VITE_MAP_ACCESS_TOKEN
@@ -173,9 +180,17 @@ function addLocationToMap() {
   });
 }
 
+function navigateToNewPlacePage(): void {
+  router.push({ name: 'new' })
+    .catch(e => {
+      console.error('Error navigating to new place page:', e)
+    })
+}
+
 function initializeComponent() {
   createMap() // TODO: When redrawing the map, there is a warning about the map already existing.
 }
+
 
 
 // lifecycle hooks
