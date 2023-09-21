@@ -39,3 +39,10 @@ quasar build
 
 ### Customize the configuration
 See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
+
+
+
+Deploy
+quasar build
+Drag src/dist/spa to S3 bucket
+Create a CloudFront invalidation
