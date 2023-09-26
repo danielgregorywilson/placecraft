@@ -2,7 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-page-container class="row justify-center">
       <q-page class="q-mx-lg" id="page">
-        <div id="page-title" class="text-h4 q-my-lg text-center">PlaceCraft: Reimagining streets</div>
+        <div id="page-title" class="text-h4 q-my-lg text-center text-wrap">PlaceCraft:<br class="show-mobile"> Reimagining streets</div>
         <div class="q-mb-md">
           <div id="map"></div>
         </div>
@@ -123,7 +123,7 @@ function addLocationToMap() {
     },
     'properties': {
       'description':
-        `<div class="row"><a href="/location/1">View this place</a></div><div class="row"><img href="/location/1" src="${CurrentImg}" style="width: 100px;"/></div>`,
+        `<a href="/location/1"><div class="row">View this place</div><div class="row"><img href="/location/1" src="${CurrentImg}" style="width: 200px;"/></div></a>`,
       'icon': 'theatre'
     }
   })

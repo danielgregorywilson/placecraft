@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-page-container>
-      <q-page class="q-mx-lg" id="page">
+      <q-page class="q-mx-lg q-mb-lg" id="page">
         <div id="page-title" class="text-h4 q-my-lg text-center">Broadway at High</div>
         <div class="row justify-center q-mb-md">
           <q-img
@@ -23,6 +23,12 @@
             <q-carousel-slide :name="2" :img-src="RailImg" />
           </q-carousel>
         </div>
+        <div class="row justify-center q-mb-md">
+          <image-compare
+            :current-img="CurrentImg"
+            :new-img="WalkableImg"
+          />
+        </div>
         <div class="row justify-center">
           <q-btn color="primary" label="Share on MyPlace" icon="share" />
         </div>
@@ -41,6 +47,7 @@ import { ref } from 'vue'
 import CurrentImg from 'src/assets/locations/broadway-high-current.jpeg'
 import RailImg from 'src/assets/locations/broadway-high-rail.jpeg'
 import WalkableImg from 'src/assets/locations/broadway-high-walkable.jpeg'
+import ImageCompare from 'src/components/ImageCompare.vue';
 
 let slide = ref(1)
 

@@ -1,1 +1,11 @@
 // app global css in SCSS form
+
+.show-mobile {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .show-mobile {
+        display: block;
+    }
+}
