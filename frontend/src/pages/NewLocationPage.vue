@@ -7,6 +7,7 @@
           @submit="onSubmit"
           @reset="onReset"
           class="q-gutter-md"
+          style="max-width: 400px; margin: auto"
         >
           <q-input
             filled
@@ -32,12 +33,21 @@
             </template>
           </q-file>
 
+          <div class="row q-gutter-sm justify-between">
+            <q-input filled v-model="lat" label="Latitude" />
+            <q-input filled v-model="lon" label="Longitude" />
+          </div>
+
+          <AddTags />
+
           <q-toggle v-model="accept" label="I accept the license and terms" />
 
           <div>
             <q-btn label="Submit" type="submit" color="primary"/>
             <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
           </div>
+
+          {{ result }}
         </q-form>
       </q-page>
     </q-page-container>
@@ -52,10 +62,17 @@
 import { Notify } from 'quasar'
 import { ref } from 'vue'
 
+import AddTags from 'src/components/AddTags.vue';
+
 let name = ref('')
 let email = ref('')
 let image = ref('')
+let lat = ref('')
+let lon = ref('')
+let tags = ref([])
 let accept = ref(false)
+
+let result = ref({})
 
 function onSubmit () {
   if (accept.value !== true) {
@@ -66,6 +83,14 @@ function onSubmit () {
       icon: 'warning',
       message: 'You need to accept the license and terms first'
     })
+    result.value = {
+      name: name.value,
+      email: email.value,
+      image: image.value,
+      lat: lat.value,
+      lon: lon.value,
+      tags: tags.value
+    }
   }
   else {
     // Notify.create('Submitted')
