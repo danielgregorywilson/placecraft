@@ -18,7 +18,10 @@
 <script setup lang="ts">
 import { onMounted, ref, Ref } from 'vue'
 import { QSelect } from 'quasar'
+import useEventBus from 'src/eventBus'
 import { Tag } from 'src/types'
+
+const bus = useEventBus()
 
 let addFormTags: Ref<Array<{'name': string}>> = ref([])
 let addFormNewTag = ref('')
@@ -54,6 +57,7 @@ function setNewAddTagName(val: string) {
 function addFormAddTag(): void {
   addFormTags.value.push({'name': addFormNewTag.value})
   addFormNewTag.value = ''
+  bus.emit('emitUpdatedTags', addFormTags.value)
 }
 
 function addFormRemoveTag(tagIndex: number): void {

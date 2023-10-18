@@ -4,6 +4,7 @@
       <q-page class="q-mx-lg" id="page">
         <div id="page-title" class="text-h4 q-my-lg text-center">Add a location</div>
         <q-form
+          id="location-add-form"
           @submit="onSubmit"
           @reset="onReset"
           class="q-gutter-md"
@@ -46,7 +47,6 @@
             <q-btn label="Submit" type="submit" color="primary"/>
             <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
           </div>
-
           {{ result }}
         </q-form>
       </q-page>
@@ -60,16 +60,21 @@
 
 <script setup lang="ts">
 import { Notify } from 'quasar'
-import { ref } from 'vue'
+import { ref, Ref, watch } from 'vue'
+// import emailjs from 'emailjs-com'
 
 import AddTags from 'src/components/AddTags.vue';
+import useEventBus from 'src/eventBus'
+import { Tag } from 'src/types'
+
+const { bus } = useEventBus()
 
 let name = ref('')
 let email = ref('')
 let image = ref('')
 let lat = ref('')
 let lon = ref('')
-let tags = ref([])
+let tags = ref([]) as Ref<Array<Tag>>
 let accept = ref(false)
 
 let result = ref({})
@@ -83,14 +88,6 @@ function onSubmit () {
       icon: 'warning',
       message: 'You need to accept the license and terms first'
     })
-    result.value = {
-      name: name.value,
-      email: email.value,
-      image: image.value,
-      lat: lat.value,
-      lon: lon.value,
-      tags: tags.value
-    }
   }
   else {
     // Notify.create('Submitted')
@@ -100,6 +97,32 @@ function onSubmit () {
       icon: 'cloud_done',
       message: 'Submitted'
     })
+
+    result.value = {
+      name: name.value,
+      email: email.value,
+      image: image.value,
+      lat: lat.value,
+      lon: lon.value,
+      tags: tags.value
+    }
+    sendEmail()
+  }
+}
+
+function sendEmail() {
+  try {
+    const params = {
+      from_name: name.value,
+      from_email: email.value,
+      image: image.value,
+      lat: lat.value,
+      lon: lon.value,
+      tags: tags.value
+    }
+    // emailjs.send('service_v87jl59', 'template_a5ebnkd', params, '0p16heRdoT_rLhlVs')
+  } catch(error) {
+      console.log({error})
   }
 }
 
@@ -108,6 +131,10 @@ function onReset () {
   email.value = ''
   accept.value = false
 }
+
+watch(() => bus.value.get('emitUpdatedTags'), (newTags: Array<Tag>) => {
+  tags.value = newTags
+})
 
 // lifecycle hooks
 </script>

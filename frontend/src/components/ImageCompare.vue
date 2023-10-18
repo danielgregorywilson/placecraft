@@ -46,18 +46,16 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 
-interface Props {
+defineProps<{
   currentImg: string;
   newImg: string;
-}
-
-const props = withDefaults(defineProps<Props>(), {});
+}>()
 
 // https://www.w3schools.com/howto/howto_js_image_comparison.asp
 function initComparisons() {
   var x, i;
   /* Find all elements with an "overlay" class: */
-  x = document.getElementsByClassName("img-comp-overlay");
+  x = document.getElementsByClassName('img-comp-overlay');
   for (i = 0; i < x.length; i++) {
     /* Once for each "overlay" element:
     pass the "overlay" element as a parameter when executing the compareImages function: */
@@ -69,31 +67,31 @@ function initComparisons() {
     w = img.offsetWidth;
     h = img.offsetHeight;
     /* Set the width of the img element to 50%: */
-    img.style.width = (w / 2) + "px";
+    img.style.width = (w / 2) + 'px';
     /* Create slider: */
-    slider = document.createElement("DIV");
-    slider.setAttribute("class", "img-comp-slider");
+    slider = document.createElement('DIV');
+    slider.setAttribute('class', 'img-comp-slider');
     /* Insert slider */
     img.parentElement.insertBefore(slider, img);
     /* Position the slider in the middle: */
-    slider.style.top = (h / 2) - (slider.offsetHeight / 2) + "px";
-    slider.style.left = (w / 2) - (slider.offsetWidth / 2) + "px";
+    slider.style.top = (h / 2) - (slider.offsetHeight / 2) + 'px';
+    slider.style.left = (w / 2) - (slider.offsetWidth / 2) + 'px';
     /* Execute a function when the mouse button is pressed: */
-    slider.addEventListener("mousedown", slideReady);
+    slider.addEventListener('mousedown', slideReady);
     /* And another function when the mouse button is released: */
-    window.addEventListener("mouseup", slideFinish);
+    window.addEventListener('mouseup', slideFinish);
     /* Or touched (for touch screens: */
-    slider.addEventListener("touchstart", slideReady);
+    slider.addEventListener('touchstart', slideReady);
      /* And released (for touch screens: */
-    window.addEventListener("touchend", slideFinish);
+    window.addEventListener('touchend', slideFinish);
     function slideReady(e) {
       /* Prevent any other actions that may occur when moving over the image: */
       e.preventDefault();
       /* The slider is now clicked and ready to move: */
       clicked = 1;
       /* Execute a function when the slider is moved: */
-      window.addEventListener("mousemove", slideMove);
-      window.addEventListener("touchmove", slideMove);
+      window.addEventListener('mousemove', slideMove);
+      window.addEventListener('touchmove', slideMove);
     }
     function slideFinish() {
       /* The slider is no longer clicked: */
@@ -124,9 +122,9 @@ function initComparisons() {
     }
     function slide(x) {
       /* Resize the image: */
-      img.style.width = x + "px";
+      img.style.width = x + 'px';
       /* Position the slider: */
-      slider.style.left = img.offsetWidth - (slider.offsetWidth / 2) + "px";
+      slider.style.left = img.offsetWidth - (slider.offsetWidth / 2) + 'px';
     }
   }
 }

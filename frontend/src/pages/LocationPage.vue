@@ -52,5 +52,7 @@ import ImageCompare from 'src/components/ImageCompare.vue';
 let slide = ref(1)
 
 // lifecycle hooks
+
+
 </script>
 
