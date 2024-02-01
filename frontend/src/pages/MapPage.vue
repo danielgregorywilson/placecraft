@@ -186,9 +186,14 @@ function addLocationToMap() {
 }
 
 function navigateToNewPlacePage(): void {
-  router.push({ name: 'new' })
+  
+
+  // window.open('https://docs.google.com/forms/d/e/1FAIpQLSea-ZXq4OW4ZM5HExd5D4N4XUn6K6vjmnS0bkm15bHR5DmUfA/viewform', '_blank')
+  
+  
+  router.push({ name: 'turnstile' })
     .catch(e => {
-      console.error('Error navigating to new place page:', e)
+      console.error('Error navigating to turnstile page:', e)
     })
 }
 
