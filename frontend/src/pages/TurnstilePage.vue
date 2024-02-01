@@ -1,6 +1,6 @@
 <template>
   <div
-    class="cf-turnstile"
+    id="turnstile-container"
     data-sitekey="0x4AAAAAAARCAqkeSv4DeLPk"
     data-callback="javascriptCallback"
   ></div>
@@ -13,10 +13,11 @@
 import { onMounted } from 'vue'
 
 window.onloadTurnstileCallback = function () {
-  turnstile.render('#example-container', {
+  turnstile.render('#turnstile-container', {
     sitekey: '0x4AAAAAAARCAqkeSv4DeLPk',
-    callback: function(token) {
+    callback: function(token: string) {
       console.log(`Challenge Success ${token}`);
+      window.open('https://docs.google.com/forms/d/e/1FAIpQLSea-ZXq4OW4ZM5HExd5D4N4XUn6K6vjmnS0bkm15bHR5DmUfA/viewform')
     },
   });
 };
