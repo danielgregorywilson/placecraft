@@ -2,12 +2,17 @@
   <q-layout view="lHh Lpr lFf">
     <q-page-container class="row justify-center">
       <q-page class="q-mx-lg" id="page">
-        <div id="page-title" class="text-h4 q-my-lg text-center text-wrap">PlaceCraft:<br class="show-mobile"> Reimagining streets</div>
+        <div id="page-title" class="text-h4 q-my-lg text-center text-wrap">
+          PlaceCraft:<br class="show-mobile"> Reimagining streets
+        </div>
         <div class="q-mb-md">
           <div id="map"></div>
         </div>
         <div class="row justify-center q-mb-md">
-          <q-btn color="primary" @click="navigateToNewPlacePage()">Add a place</q-btn>
+          <q-btn color="primary" @click="navigateToNewPlacePage()">
+            Add a place
+            <q-icon name="open_in_new" class="q-ml-sm" />
+          </q-btn>
         </div>
 
       </q-page>
